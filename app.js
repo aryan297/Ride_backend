@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cors = require('cors')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/ride');
 
 var app = express();
 
@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/ride', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,6 +35,11 @@ const mongoose = require('mongoose')
 
 var mongodb= require('mongodb');
 var MongoClient= mongodb.MongoClient;
+
+/*  please add DB URL here */
+
+//var url='' /*  please add DB URL here */
+
 var url=''
 
  mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true
@@ -43,9 +48,10 @@ var url=''
 }).catch((error) => {
  console.log(error)
 }) 
-require('./models/member');
-require('./models/team');
-require('./models/priority');
+
+
+require('./models/driver');
+require('./models/ride');
 
 // error handler
 app.use(function(err, req, res, next) {

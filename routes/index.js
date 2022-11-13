@@ -1,63 +1,52 @@
 var express = require('express');
-const member = require('../models/member');
 var router = express.Router();
-var Member = require('../models/member')
-var Priority = require('../models/priority')
-
-/* GET home page. */
+var Driver = require('../models/driver')
 
 
+/* GET Ride page. */
 
 
-router.post("/member", async (request, response) => {
+
+
+router.post("/driver", async (request, response) => {
   console.log(request.body);
-  const member = new Member(request.body);
+  const driver = new Driver(request.body);
 
   try {
-    await member.save();
-    response.json(member);
+    await driver.save();
+    response.json(driver);
   } catch (error) {
     response.status(500).json(error);
   }
 });
 
-router.get("/member", async (request, response) => {
-  //const member = await Member.find({});
-  const member = await Member.find({})
-  .populate('priority')
+
+router.get("/driver", async (request, response) => {
+  //const driver = await driver.find({});
+  const driver = await Driver.find({})
 
   try {
-    response.send(member);
+    response.send(driver);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 
 
-router.get("/priority", async (request, response) => {
-  const priority = await Priority.find({});
+router.patch("/driver/:id", async (request, response) => {
 
   try {
-    response.send(priority);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
-
-router.patch("/member/:id", async (request, response) => {
-
-  try {
-   const res= await Member.findByIdAndUpdate(request.params.id, request.body);
+   const res= await Driver.findByIdAndUpdate(request.params.id, request.body);
     response.send(res);
   } catch (error) {
     response.status(500).send(error);
   }
 });
 
-router.get("/getMember", async (request, response) => {
-  const member = await Member.find({})
+router.get("/getdriver", async (request, response) => {
+  const driver = await driver.find({})
   try {
-    response.send(member);
+    response.send(driver);
   } catch (error) {
     response.status(500).send(error);
   }
