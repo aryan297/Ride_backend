@@ -10,7 +10,7 @@ npm run start
 
 '''
 
-
+please use port 3000 , it is connected to angular application
 
 
 
